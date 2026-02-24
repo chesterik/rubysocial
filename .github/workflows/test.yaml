@@ -12,19 +12,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3 # Оновись до v3
+
       - name: Install ruby
         uses: ruby/setup-ruby@v1
         with:
+          ruby-version: "3.2" # Вкажи свою версію
           bundler-cache: true
-      - uses: borales/actions-yarn@v2.3.0
-        with:
-          cmd: install
+
+      # ЗАМІСТЬ borales/actions-yarn РОБИМО ТАК:
+      - name: Install dependencies
+        run: |
+          sudo apt-get install -y libpq-dev # Потрібно для pg gem
+          yarn install --frozen-lockfile
+
       - name: Run tests
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/purrpurr_test
           RAILS_ENV: test
         run: |
-          bin/rails db:create 
-          bin/rails db:prepare 
+          bin/rails db:create
+          bin/rails db:prepare
           bin/rails test
