@@ -12,12 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.2" # Вкажи свою версію
+          ruby-version: "2.7"
           bundler-cache: true
 
       # ЗАМІСТЬ borales/actions-yarn РОБИМО ТАК:
