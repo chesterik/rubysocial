@@ -40,3 +40,4 @@
 yarn-debug.log*
 .yarn-integrity
 .file_repo.txt
+config/master.key
